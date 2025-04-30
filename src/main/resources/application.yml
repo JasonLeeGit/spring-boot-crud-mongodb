@@ -1,0 +1,14 @@
+application:
+ musicPath: F:\\Music\\
+ 
+spring:
+ profiles:
+  active: dev
+ data: 
+  mongodb:
+   host: localhost
+   port: 28017
+   database: ArtistWithAlbumsMongoDatabase
+server:
+ port: 8989
+  
