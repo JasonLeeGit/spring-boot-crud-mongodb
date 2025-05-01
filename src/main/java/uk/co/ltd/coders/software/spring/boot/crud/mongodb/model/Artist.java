@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,5 @@ public class Artist {
 	private String artistName;
 
 	@NotEmpty(message = "album cannot be empty")
-	private List<Album> albums;
+	private List<@Valid Album> albums;
 }

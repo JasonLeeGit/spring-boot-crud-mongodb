@@ -1,6 +1,7 @@
 package uk.co.ltd.coders.software.spring.boot.crud.mongodb.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -11,5 +12,5 @@ public interface ISearchService {
 	
 	List<Artist> searchAllArtists();
 	
-	Artist searchArtist(String artistName);
+	Optional<Artist> searchArtist(String artistName);
 }
