@@ -1,10 +1,7 @@
 package uk.co.ltd.coders.software.spring.boot.crud.mongodb.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,26 +30,17 @@ public class CreateArtistController {
 
 	@PostMapping("/create/artist")
 	public ResponseEntity<Artist> createNewArtist(@RequestBody @Valid Artist artist) {
-		Artist insertedArtist = null;
-		StringBuffer errorMessage = new StringBuffer();		
-		errorMessage.append("Error failed to save new artist");
-
 		if (doesArtistAlreadyExist(artist)) {
 			artist.setId(sequenceGenerator.generateSequence(Artist.SEQUENCE_NAME));
-			insertedArtist = createService.insertArtist(artist);
+			
+			return createService.insertArtist(artist)
+					.map(insertedArtist -> ResponseEntity.ok(insertedArtist))
+					.orElse(ResponseEntity.notFound().build());
 		} else {
-			errorMessage.append(", artist already exists in the database");
-		}
-
-		if (insertedArtist != null) {
-			return ResponseEntity.ok(insertedArtist);
-		} else {
-			MultiValueMap<String, String> headers = new HttpHeaders();
-			headers.add("Error message", errorMessage.toString());
-			return new ResponseEntity<Artist>(headers, HttpStatus.BAD_REQUEST);
+			return ResponseEntity.unprocessableEntity().build();
 		}
 	}
-
+	
 	private boolean doesArtistAlreadyExist(Artist artist) {
 		return searchService.searchArtist(artist.getArtistName()).isEmpty();
 	}

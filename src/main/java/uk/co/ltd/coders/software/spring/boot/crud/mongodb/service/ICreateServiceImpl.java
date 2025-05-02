@@ -1,5 +1,7 @@
 package uk.co.ltd.coders.software.spring.boot.crud.mongodb.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,8 @@ public class ICreateServiceImpl implements ICreateService {
 	ArtistRepository artistRepository;
 
 	@Override
-	public Artist insertArtist(Artist artist) {
-		return artistRepository.insert(artist);
+	public Optional<Artist> insertArtist(Artist artist) {
+		return Optional.of(artistRepository.insert(artist));
 	}
 
 }

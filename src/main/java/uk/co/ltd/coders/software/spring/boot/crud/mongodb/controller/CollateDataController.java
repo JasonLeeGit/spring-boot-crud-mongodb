@@ -24,7 +24,6 @@ public class CollateDataController {
 			System.out.println("Loading Data!");
 			
 			writeService.saveAndFlush(readService.directoryList());
-
 //			readService.directoryList().forEach(artist -> {
 //				artist.setId(sequenceGenerator.generateSequence(Artist.SEQUENCE_NAME));
 //				writeService.save(artist);
