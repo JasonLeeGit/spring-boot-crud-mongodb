@@ -30,7 +30,7 @@ public class CreateArtistController {
 
 	@PostMapping("/create/artist")
 	public ResponseEntity<Artist> createNewArtist(@RequestBody @Valid Artist artist) {
-		if (doesArtistAlreadyExist(artist)) {
+		if (artistDoesNotAlreadyExist(artist)) {
 			artist.setId(sequenceGenerator.generateSequence(Artist.SEQUENCE_NAME));
 			
 			return createService.insertArtist(artist)
@@ -41,7 +41,7 @@ public class CreateArtistController {
 		}
 	}
 	
-	private boolean doesArtistAlreadyExist(Artist artist) {
+	private boolean artistDoesNotAlreadyExist(Artist artist) {
 		return searchService.searchArtist(artist.getArtistName()).isEmpty();
 	}
 }
