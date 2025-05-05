@@ -73,19 +73,13 @@ public class DeleteArtistControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 		
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/artist/service/delete/artist/by/name?artistName=TestArtist")
-				.content(asJsonString(artist))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/artist/service/delete/artist/by/name?artistName=TestArtist"))
 				.andExpect(status().isOk());
 	}
 	
 	@Test
 	public void deleteArtistByNameWhenNoArtistFound() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/artist/service/delete/artist/by/name?artistName=TestArtist")
-				.content(asJsonString(artist))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/artist/service/delete/artist/by/name?artistName=TestArtist"))
 				.andExpect(status().isOk());
 	}
 	
