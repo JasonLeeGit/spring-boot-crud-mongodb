@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import uk.co.ltd.coders.software.spring.boot.crud.mongodb.repository.SequenceGen
 @Service
 public class ReadServiceImpl implements IReadService {
 
+	private static final Logger logger = LoggerFactory.getLogger(ReadServiceImpl.class);
 	@Autowired
 	private ConfigPropertiesHelper properties;
 	
@@ -72,7 +75,8 @@ public class ReadServiceImpl implements IReadService {
 			e.printStackTrace();
 		}
 
-		artistsList.forEach(a -> System.out.println(a.getArtistName()));
+		logger.info("ReadServiceImpl - Artist results, ");
+		artistsList.forEach(a -> logger.info(a.getArtistName()));
 		
 		return artistsList;
 	}

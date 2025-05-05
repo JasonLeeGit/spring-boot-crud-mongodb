@@ -11,5 +11,7 @@ import uk.co.ltd.coders.software.spring.boot.crud.mongodb.model.Artist;
 public interface ArtistRepository extends MongoRepository<Artist, Integer> {
 	
 	Optional<Artist> findByArtistName(String artistName);
+	
+	void deleteByArtistName(String artistName);
 
 }

@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Album {
 
-	@NotEmpty(message = "album cannot be empty")
+	@NotEmpty(message = "album name cannot be empty")
 	private String albumName;
 }

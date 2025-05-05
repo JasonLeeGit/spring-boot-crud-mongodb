@@ -24,4 +24,9 @@ public class SearchServiceImpl implements ISearchService {
 	public Optional<Artist> searchArtist(String artistName) {
 		return artistRepository.findByArtistName(artistName);
 	}
+	
+	@Override
+	public Optional<Artist> searchById(Integer id) {
+		return artistRepository.findById(id);
+	}
 }

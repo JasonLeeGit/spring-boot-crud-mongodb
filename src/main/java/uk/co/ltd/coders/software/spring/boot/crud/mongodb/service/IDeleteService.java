@@ -7,4 +7,6 @@ public interface IDeleteService {
 	
 	void deleteArtistById(Integer id);
 
+	void deleteArtistByArtistName(String artistName);
+
 }

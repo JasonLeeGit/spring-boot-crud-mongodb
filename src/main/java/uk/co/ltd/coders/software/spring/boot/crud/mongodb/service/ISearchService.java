@@ -13,4 +13,6 @@ public interface ISearchService {
 	List<Artist> searchAllArtists();
 	
 	Optional<Artist> searchArtist(String artistName);
+
+	Optional<Artist> searchById(Integer id);
 }
