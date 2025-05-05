@@ -54,10 +54,7 @@ public class SearchArtistControllerTest {
 	
 	@Test
 	public void searchAllArtistsWhenNoneFoundTest() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/artist/service/search/all")
-				.content(asJsonString(artist))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/artist/service/search/all"))
 				.andExpect(status().isNotFound());	
 	}
 
@@ -69,10 +66,7 @@ public class SearchArtistControllerTest {
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());		
 
-		mockMvc.perform(MockMvcRequestBuilders.get("/v1/artist/service/search/all")
-				.content(asJsonString(artist))
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(MockMvcRequestBuilders.get("/v1/artist/service/search/all"))
 				.andExpect(status().isOk());	
 	}
 	
