@@ -13,10 +13,10 @@ import uk.co.ltd.coders.software.spring.boot.crud.mongodb.controller.UpdateArtis
 @ActiveProfiles("test")
 @Suite
 @SelectClasses({ 
+	CollateDataControllerTest.class,
 	CreateArtistControllerTest.class,
 	DeleteArtistControllerTest.class,
 	SearchArtistControllerTest.class,
-	UpdateArtistControllerTest.class,
-	CollateDataControllerTest.class
+	UpdateArtistControllerTest.class
 })
 public class JunitTestSuite {}

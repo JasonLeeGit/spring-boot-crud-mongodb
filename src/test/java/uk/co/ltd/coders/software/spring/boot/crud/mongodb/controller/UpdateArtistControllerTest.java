@@ -19,11 +19,10 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import uk.co.ltd.coders.software.spring.boot.crud.mongodb.ArtistMongDBApplication;
 import uk.co.ltd.coders.software.spring.boot.crud.mongodb.model.Album;
 import uk.co.ltd.coders.software.spring.boot.crud.mongodb.model.Artist;
+import uk.co.ltd.coders.software.spring.boot.crud.mongodb.util.ITestHelper;
 
 @Testcontainers
 @SpringBootTest(classes = ArtistMongDBApplication.class)
@@ -31,6 +30,7 @@ public class UpdateArtistControllerTest {
 
 	@Autowired
 	protected WebApplicationContext webApplicationContext;
+	@SuppressWarnings("resource")
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0").withExposedPorts(27017);
 
 	private MockMvc mockMvc;
@@ -54,14 +54,14 @@ public class UpdateArtistControllerTest {
 	@Test
 	public void updateArtistTest() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/v1/artist/service/create/artist")
-				.content(asJsonString(artist))
+				.content(ITestHelper.asJsonString(artist))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 		
 		artist.setArtistName("TestArtistUpdated");
 		mockMvc.perform(MockMvcRequestBuilders.put("/v1/artist/service/update/artist")
-				.content(asJsonString(artist))
+				.content(ITestHelper.asJsonString(artist))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());		
@@ -71,17 +71,9 @@ public class UpdateArtistControllerTest {
 	@AfterEach
 	public void tearDown() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.delete("/v1/artist/service/delete/artist/by/name?artistName=TestArtist")
-				.content(asJsonString(artist))
+				.content(ITestHelper.asJsonString(artist))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
-	}
-	
-	private static String asJsonString(final Object obj) {
-		try {
-			return new ObjectMapper().writeValueAsString(obj);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 }

@@ -31,8 +31,9 @@ public class CollateDataControllerTest {
 	@Autowired
 	protected WebApplicationContext webApplicationContext;
 
+	@SuppressWarnings("resource")
 	static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:7.0").withExposedPorts(27017);
-  
+	
     @DynamicPropertySource
     static void containersProperties(DynamicPropertyRegistry registry) {
         mongoDBContainer.start();
@@ -46,11 +47,12 @@ public class CollateDataControllerTest {
 	}
 	
 	@Test
-	public void createNewArtistForExistingTest() throws Exception {	
+	public void createNewArtistForExistingTest() throws Exception {
+		assert(writeService.isRepositoryPopulated() == 0);
+		
 		mockMvc.perform(MockMvcRequestBuilders.get("/v1/artist/service/collate/data"))
 					.andExpect(status().isOk());
 		
 		assert(writeService.isRepositoryPopulated() == 2);
-
 	}
 }
