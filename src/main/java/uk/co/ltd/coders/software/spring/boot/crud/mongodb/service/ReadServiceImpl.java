@@ -54,7 +54,6 @@ public class ReadServiceImpl implements IReadService {
 						albumNames.forEach(albumName -> {
 
 							if (isValidFileType(albumName)) {
-								// save then to NoSQL DB
 								Album album = new Album();
 								album.setAlbumName(albumName);
 								albumList.add(album);
